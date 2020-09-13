@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
         // $this->call(UsersTableSeeder::class);
         // 以下を追記
         $this->call(ArticlesTableSeeder::class);
+        $this->call(SalesTableSeeder::class);
     }
 }

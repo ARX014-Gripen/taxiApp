@@ -22,7 +22,9 @@ class ArticlesController extends Controller
         // 以下をコメントアウト
         // return $articles;
         // 以下のように修正
-        return view('articles.index', ['articles' => $articles]);    
+        $keys = ['家','研究室','外出','学内','長期不在'];
+        $counts = [10,4,3,2,1];
+        return view('articles.index', ['articles' => $articles,'keys'=>$keys,'counts'=>$counts]);    
     }
 
     /**

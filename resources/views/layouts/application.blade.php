@@ -8,6 +8,7 @@
   <title>@yield('title')</title>
 </head>
 <body>
+  <div class="card-panel teal lighten-2">各タクシー売上チェックアプリ</div>
   @yield('content')
 </body>
 </html>

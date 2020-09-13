@@ -8,6 +8,7 @@
 @section('content')
     <div class="row">
         <div class="col s3">
+
             <div class="card">
                 <div class="card-content">
                     <a href="/articles/create">新規作成</a>
@@ -20,13 +21,37 @@
             </div>
             <div class="card">
                 <div class="card-content">
-                    <a href="/articles/create">TOP</a>
+                    <a href="/articles/create">ホーム画面に戻る</a>
                 </div>
             </div>
+            <div class="content">
+                <canvas id="allChart"></canvas>
+            </div>
 
+            <script src="{{ mix('js/show_chart.js') }}"></script>
+            <script>
+                id = 'allChart';
+                labels = @json($keys);
+                data = @json($counts);
+                make_chart(id, labels, data);
+
+            </script>
         </div>
 
         <div class="col s9">
+            @if ($articles->lastPage() > 1)
+
+                @if ($articles->previousPageUrl())
+                    <a href="{{ $articles->previousPageUrl() }}">前のページへ</a>
+                @endif
+
+                {{ $articles->currentPage() }} / {{ $articles->lastPage() }}
+
+                @if ($articles->nextPageUrl())
+                    <a href="{{ $articles->nextPageUrl() }}">次のページへ</a>
+                @endif
+
+            @endif
             @foreach ($articles as $article)
                 <div class="card">
                     <div class="card-content">
@@ -54,19 +79,8 @@
                 </div>
             @endforeach
 
-            @if ($articles->lastPage() > 1)
 
-                @if ($articles->previousPageUrl())
-                    <a href="{{ $articles->previousPageUrl() }}">前のページへ</a>
-                @endif
 
-                {{ $articles->currentPage() }} / {{ $articles->lastPage() }}
-
-                @if ($articles->nextPageUrl())
-                    <a href="{{ $articles->nextPageUrl() }}">次のページへ</a>
-                @endif
-
-            @endif
         </div>
     </div>
 
