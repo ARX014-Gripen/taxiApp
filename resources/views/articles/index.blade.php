@@ -45,6 +45,20 @@
       </div>
     </div>
   @endforeach
+
+  @if($articles->lastPage() > 1)
+
+  @if($articles->previousPageUrl())
+      <a href="{{ $articles->previousPageUrl() }}">前のページへ</a>
+  @endif
+
+  {{ $articles->currentPage() }} / {{ $articles->lastPage() }}
+
+  @if($articles->nextPageUrl())
+      <a href="{{ $articles->nextPageUrl() }}">次のページへ</a>
+  @endif
+
+@endif
 @endsection
 <script>
   function deletePost(e) {

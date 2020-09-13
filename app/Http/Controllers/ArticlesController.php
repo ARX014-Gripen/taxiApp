@@ -17,7 +17,8 @@ class ArticlesController extends Controller
     {
         //
         // $articles変数にArticleモデルから全てのレコードを取得して、代入
-        $articles = Article::all();
+        // $articles = Article::all();
+        $articles = Article::paginate(5);
         // 以下をコメントアウト
         // return $articles;
         // 以下のように修正
