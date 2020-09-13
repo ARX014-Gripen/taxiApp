@@ -24,18 +24,6 @@
                     <a href="/articles/create">ホーム画面に戻る</a>
                 </div>
             </div>
-            <div class="content">
-                <canvas id="allChart"></canvas>
-            </div>
-
-            <script src="{{ mix('js/show_chart.js') }}"></script>
-            <script>
-                id = 'allChart';
-                labels = @json($keys);
-                data = @json($counts);
-                make_chart(id, labels, data);
-
-            </script>
         </div>
 
         <div class="col s9">
@@ -79,11 +67,36 @@
                 </div>
             @endforeach
 
+            <div class="chart-container" style="position: relative; width:80vw; height:50vh">
+                <canvas id="allChart"></canvas>
+            </div>
+
+            <script src="{{ mix('js/show_chart.js') }}"></script>
+            <script>
+                id = 'allChart';
+                labels = @json($keys);
+                data = @json($counts);
+                make_chart(id, labels, data);
+
+            </script>
 
 
         </div>
     </div>
 
+    {{-- <div class="chart-container" style="position: relative; width:80vw; height:50vh">
+        <canvas id="allChart"></canvas>
+    </div>
+
+    <script src="{{ mix('js/show_chart.js') }}"></script>
+    <script>
+        id = 'allChart';
+        labels = @json($keys);
+        data = @json($counts);
+        make_chart(id, labels, data);
+
+    </script>
+    --}}
 @endsection
 <script>
     function deletePost(e) {
