@@ -10,7 +10,7 @@
         <div class="col s3">
             <div class="card">
                 <div class="card-content">
-                    <a href="/articles/create">日次売り上げ入力</a>
+                    <a href="/articles/create">日次売上入力</a>
                 </div>
             </div>
             <div class="card">
