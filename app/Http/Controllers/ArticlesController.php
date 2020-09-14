@@ -136,7 +136,7 @@ class ArticlesController extends Controller
         // return $articles;
         // 以下のように修正
         $keys = ['１号車','２号車','３号車','４号車','５号車'];
-        $counts = [10,4,3,2,1];
+        $counts = [10000,5000,3000,200,100];
         return view('home', ['keys'=>$keys,'counts'=>$counts]);      }
 
 }

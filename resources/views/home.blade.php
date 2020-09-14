@@ -11,17 +11,12 @@
 
             <div class="card">
                 <div class="card-content">
-                    <a href="/articles/create">新規作成</a>
+                    <a href="/articles/create">日次売上入力</a>
                 </div>
             </div>
             <div class="card">
                 <div class="card-content">
-                    <a href="/articles/create">日次売り上げ入力</a>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-content">
-                    <a href="/articles/create">ホーム画面に戻る</a>
+                    <a href="/articles">日次売上詳細参照</a>
                 </div>
             </div>
         </div>
@@ -41,6 +36,8 @@
                 make_chart(id, labels, data);
 
             </script>
+
+            日次全体売上
 
 
         </div>

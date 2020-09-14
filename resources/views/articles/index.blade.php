@@ -8,12 +8,6 @@
 @section('content')
     <div class="row">
         <div class="col s3">
-
-            <div class="card">
-                <div class="card-content">
-                    <a href="/articles/create">新規作成</a>
-                </div>
-            </div>
             <div class="card">
                 <div class="card-content">
                     <a href="/articles/create">日次売り上げ入力</a>
