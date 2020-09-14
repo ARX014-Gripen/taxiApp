@@ -21,7 +21,7 @@
             </div>
             <div class="card">
                 <div class="card-content">
-                    <a href="/articles/create">ホーム画面に戻る</a>
+                    <a href="/home">ホーム画面に戻る</a>
                 </div>
             </div>
         </div>
@@ -67,9 +67,10 @@
                 </div>
             @endforeach
 
-            <div class="chart-container" style="position: relative; width:80vw; height:50vh">
+            {{-- <div class="chart-container" style="position: relative; width:80vw; height:50vh">
                 <canvas id="allChart"></canvas>
             </div>
+
 
             <script src="{{ mix('js/show_chart.js') }}"></script>
             <script>
@@ -79,7 +80,7 @@
                 make_chart(id, labels, data);
 
             </script>
-
+ --}}
 
         </div>
     </div>

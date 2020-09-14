@@ -123,4 +123,20 @@ class ArticlesController extends Controller
         // 一覧にリダイレクト
         return redirect('/articles');
     }
+
+        /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function home()
+    {
+       // 以下をコメントアウト
+        // return $articles;
+        // 以下のように修正
+        $keys = ['１号車','２号車','３号車','４号車','５号車'];
+        $counts = [10,4,3,2,1];
+        return view('home', ['keys'=>$keys,'counts'=>$counts]);      }
+
 }

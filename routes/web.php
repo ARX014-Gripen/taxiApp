@@ -17,3 +17,5 @@ Route::get('/', function () {
 
 // 以下を追加
 Route::resource('articles', 'ArticlesController');
+
+Route::get('/home', 'ArticlesController@home');
