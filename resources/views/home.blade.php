@@ -42,7 +42,7 @@
 
         </div>
     </div>
-    {{-- {{$tasks}} --}}
+    {{$tasks}}
 
     {{-- <div class="chart-container" style="position: relative; width:80vw; height:50vh">
         <canvas id="allChart"></canvas>
