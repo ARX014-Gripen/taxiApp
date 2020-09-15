@@ -10,12 +10,20 @@
     {{-- 以下を入れないとエラーになる --}}
     {{ csrf_field() }}
     <div>
-      <label for="title">タイトル</label>
-      <input type="text" name="title" placeholder="記事のタイトルを入れる">
+      <label for="car_id">号車</label>
+      <textarea name="car_id" rows="1" cols="80" placeholder="号車番号を入れる"></textarea>
     </div>
     <div>
-      <label for="body">内容</label>
-      <textarea name="body" rows="8" cols="80" placeholder="記事の内容を入れる"></textarea>
+      <label for="money">売上</label>
+      <textarea name="money" rows="1" cols="80" placeholder="売上を入れる"></textarea>
+    </div>
+    <div>
+      <label for="date">日付</label>
+      <input type="date" name="date" placeholder="日付を入れる">
+    </div>
+    <div>
+      <label for="remarks">備考</label>
+      <input type="text" name="remarks" placeholder="備考を入れる">
     </div>
     <div>
       <input type="submit" value="送信">

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // 以下を忘れずに。このコントローラーで使用したいモデルがあれば随時追加をしていくっぽい
 use App\Article;
+use App\Task;
+use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
 {
@@ -22,9 +24,18 @@ class ArticlesController extends Controller
         // 以下をコメントアウト
         // return $articles;
         // 以下のように修正
-        $keys = ['家','研究室','外出','学内','長期不在'];
-        $counts = [10,4,3,2,1];
-        return view('articles.index', ['articles' => $articles,'keys'=>$keys,'counts'=>$counts]);    
+        // $keys = ['家','研究室','外出','学内','長期不在'];
+        // $counts = [10,4,3,2,1];
+        // return view('articles.index', ['articles' => $articles,'keys'=>$keys,'counts'=>$counts]);    
+        return view('articles.index', ['articles' => $articles]);    
+
+// 
+
+        // $task = Task::query();
+        // $task->whereDate('date', '2020-09-14');
+        // $tasks=$task->get();
+
+
     }
 
     /**
@@ -46,16 +57,28 @@ class ArticlesController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // モデルからインスタンスを生成
-        $article = new Article;
-        // $requestにformからのデータが格納されているので、以下のようにそれぞれ代入する  
-        $article->title = $request->title;
-        $article->body = $request->body;
-        // 保存
-        $article->save();
-        // 保存後 一覧ページへリダイレクト
+        // //
+        // // モデルからインスタンスを生成
+        // $article = new Article;
+        // // $requestにformからのデータが格納されているので、以下のようにそれぞれ代入する  
+        // $article->title = $request->title;
+        // $article->body = $request->body;
+        // // 保存
+        // $article->save();
+        // // 保存後 一覧ページへリダイレクト
+        // return redirect('/articles');
+
+
+        $task = new Task;
+        $task->car_id = $request->car_id;
+        $task->money = $request->money;
+        $task->date = $request->date;
+        $task->remarks = $request->remarks;
+        $task->save();
+        
         return redirect('/articles');
+
+
     }
 
     /**
@@ -132,11 +155,39 @@ class ArticlesController extends Controller
      */
     public function home()
     {
-       // 以下をコメントアウト
+        $task = Task::query();
+        $task->whereDate('date', '2020-09-14');
+        $task->select('car_id', DB::raw('SUM(money) as total'));
+        $task->groupBy('car_id');
+        $task->orderBy('total', 'DESC');
+        $tasks=$task->get();
+
+            //  // ユーザーのフォルダを取得する
+            //  $folders = Auth::user()->folders()->get();
+
+            //  foreach ($folders as $folder) {
+            //      if(strtotime($folder->due_date) === strtotime($request->due_date)){
+            //          $error[] = "その日付は既に登録されています。"; 
+            //          return redirect()->back()->withInput()->withErrors($error);                
+            //      }
+            //  }
+
+        // 以下をコメントアウト
         // return $articles;
         // 以下のように修正
         $keys = ['１号車','２号車','３号車','４号車','５号車'];
         $counts = [10000,5000,3000,200,100];
-        return view('home', ['keys'=>$keys,'counts'=>$counts]);      }
+
+        $keys = [];
+        $counts = [];
+
+        foreach ($tasks as $task) {
+            array_push($keys, "{$task->car_id}号車");
+            array_push($counts, $task->total);
+        }
+
+
+        return view('home', ['keys'=>$keys,'counts'=>$counts,'tasks'=>$tasks ]);      
+    }
 
 }
