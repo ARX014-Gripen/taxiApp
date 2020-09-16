@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/show_chart.js": "/js/show_chart.js"
+    "/js/show_line_chart.js": "/js/show_line_chart.js",
+    "/js/show_pie_chart.js": "/js/show_pie_chart.js"
 }

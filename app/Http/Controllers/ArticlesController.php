@@ -21,6 +21,7 @@ class ArticlesController extends Controller
     {
         $task = Task::query();
         $task->orderBy('date', 'DESC');
+        $task->orderBy('created_at', 'DESC');
         $tasks = $task->paginate(3);
         return view('articles.index', ['tasks' => $tasks]);    
     }
@@ -64,8 +65,24 @@ class ArticlesController extends Controller
     public function show($id)
     {
         $task = Task::find($id);
+
+        $taskl = Task::query();
+        $taskl->whereDate('date', $task->date);
+        // $taskl->select('car_id', DB::raw('SUM(money) as total'));
+        // $taskl->groupBy('car_id');
+        $taskl = $taskl->where('car_id',$task->car_id);
+        $taskl->orderBy('created_at', 'ASC');
+        $tasks=$taskl->get();
+
+        $keys = [];
+        $counts = [];
+        foreach ($tasks as $taskl) {
+            array_push($keys, "{$taskl->create_at}");
+            array_push($counts, $taskl->money);
+        }
+
         // viewにデータを渡す  
-        return view('articles.show', ['task' => $task]);
+        return view('articles.show', ['task' => $task,'counts' => $counts,'keys' => $keys]);
         
     }
 
@@ -144,7 +161,7 @@ class ArticlesController extends Controller
             array_push($counts, $task->total);
         }
 
-        return view('home', ['keys'=>$keys,'counts'=>$counts,'tasks'=>$tasks ]);      
+        return view('home', ['keys'=>$keys,'counts'=>$counts ]);      
     }
 
 }

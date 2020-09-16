@@ -37472,10 +37472,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/show_chart.js":
-/*!************************************!*\
-  !*** ./resources/js/show_chart.js ***!
-  \************************************/
+/***/ "./resources/js/show_pie_chart.js":
+/*!****************************************!*\
+  !*** ./resources/js/show_pie_chart.js ***!
+  \****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -37509,13 +37509,13 @@ window.make_chart = function make_chart(id, labels, data) {
 /***/ }),
 
 /***/ 1:
-/*!******************************************!*\
-  !*** multi ./resources/js/show_chart.js ***!
-  \******************************************/
+/*!**********************************************!*\
+  !*** multi ./resources/js/show_pie_chart.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\nakamura\project\test006\sampleproject\resources\js\show_chart.js */"./resources/js/show_chart.js");
+module.exports = __webpack_require__(/*! C:\Users\nakamura\project\test006\sampleproject\resources\js\show_pie_chart.js */"./resources/js/show_pie_chart.js");
 
 
 /***/ })

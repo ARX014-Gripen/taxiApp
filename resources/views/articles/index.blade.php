@@ -31,8 +31,9 @@
             @foreach ($tasks as $task)
                 <div class="card">
                     <div class="card-content">
-                        <h4>{{ $task->car_id }}</h4>
-                        <p>{{ $task->money }}</p>
+                        <h4>{{ $task->car_id }}号車</h4>
+                        <p>{{ $task->date }}　{{ $task->money }}円</p>
+                        <p></p>
                     </div>
                     <div class="card-tabs">
                         <ul class="tabs tabs-fixed-width">

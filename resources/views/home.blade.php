@@ -23,13 +23,12 @@
             <div class="chart-container" style="position: relative; width:80vw; height:50vh">
                 <canvas id="allChart"></canvas>
             </div>
-            <script src="{{ mix('js/show_chart.js') }}"></script>
+            <script src="{{ mix('js/show_pie_chart.js') }}"></script>
             <script>
                 id = 'allChart';
                 labels = @json($keys);
                 data = @json($counts);
                 make_chart(id, labels, data);
-
             </script>
             日次全体売上
         </div>

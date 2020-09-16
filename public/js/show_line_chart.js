@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -37472,10 +37472,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./resources/js/show_chart.js":
-/*!************************************!*\
-  !*** ./resources/js/show_chart.js ***!
-  \************************************/
+/***/ "./resources/js/show_line_chart.js":
+/*!*****************************************!*\
+  !*** ./resources/js/show_line_chart.js ***!
+  \*****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -37488,14 +37488,14 @@ __webpack_require__.r(__webpack_exports__);
 window.make_chart = function make_chart(id, labels, data) {
   var ctx = document.getElementById(id).getContext('2d');
   var myChart = new Chart(ctx, {
-    type: 'pie',
+    type: 'line',
     data: {
       labels: labels,
       options: {
         maintainAspectRatio: false
       },
       datasets: [{
-        label: '日次全体売上',
+        label: '車両日次売上',
         data: data,
         backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(54, 162, 235, 0.2)', 'rgba(255, 206, 86, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(153, 102, 255, 0.2)', 'rgba(255, 159, 64, 0.2)'],
         borderColor: ['rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
@@ -37508,14 +37508,14 @@ window.make_chart = function make_chart(id, labels, data) {
 
 /***/ }),
 
-/***/ 1:
-/*!******************************************!*\
-  !*** multi ./resources/js/show_chart.js ***!
-  \******************************************/
+/***/ 2:
+/*!***********************************************!*\
+  !*** multi ./resources/js/show_line_chart.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\nakamura\project\test006\sampleproject\resources\js\show_chart.js */"./resources/js/show_chart.js");
+module.exports = __webpack_require__(/*! C:\Users\nakamura\project\test006\sampleproject\resources\js\show_line_chart.js */"./resources/js/show_line_chart.js");
 
 
 /***/ })

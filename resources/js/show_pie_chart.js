@@ -10,7 +10,7 @@ window.make_chart = function make_chart(id, labels, data) {
                 maintainAspectRatio: false,
             },
             datasets: [{
-                label: '学生居場所割合',
+                label: '日次全体売上',
                 data: data,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
