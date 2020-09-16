@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->integer('car_id')->unsigned();
             $table->integer('money')->unsigned();
-            $table->text('remarks');
+            $table->text('remarks')->nullable();
             $table->date('date');
             $table->timestamps();
         });
