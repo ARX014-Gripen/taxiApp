@@ -69,14 +69,17 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
+        // 選択された日時の車両売上詳細を取得
         $task = Task::find($id);
 
+        // 選択された車両の日次売上を時系列に取得
         $taskl = Task::query();
         $taskl->whereDate('date', $task->date);
         $taskl = $taskl->where('car_id',$task->car_id);
         $taskl->orderBy('created_at', 'ASC');
         $tasks=$taskl->get();
 
+        // 線グラフ用データへパッキング
         $keys = [];
         $counts = [];
         foreach ($tasks as $taskl) {
@@ -84,7 +87,7 @@ class ArticlesController extends Controller
             array_push($counts, $taskl->money);
         }
 
-        // viewにデータを渡す  
+        // 画面呼び出しとデータの受け渡し
         return view('articles.show', ['task' => $task,'counts' => $counts,'keys' => $keys]);
         
     }
@@ -150,8 +153,11 @@ class ArticlesController extends Controller
      */
     public function home()
     {
+        // 現在時刻を日本時間に設定
         $dateTime = new Carbon(date("Y-m-d H:i:s"));
         $dateTime = $dateTime->addHours(9);
+
+        // 車両ごとの日次売上を降順で取得
         $task = Task::query();
         $task->whereDate('date', $dateTime->format("Y-m-d"));
         $task->select('car_id', DB::raw('SUM(money) as total'));
@@ -159,6 +165,7 @@ class ArticlesController extends Controller
         $task->orderBy('total', 'DESC');
         $tasks=$task->get();
 
+        // 円グラフ用データへパッキング
         $keys = [];
         $counts = [];
         foreach ($tasks as $task) {
@@ -166,6 +173,7 @@ class ArticlesController extends Controller
             array_push($counts, $task->total);
         }
 
+        // 画面呼び出しとデータの受け渡し
         return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime]);      
     }
 

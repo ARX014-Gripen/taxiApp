@@ -10,10 +10,10 @@
         <div class="col s9">
             <div class="card">
                 <div class="card-content">
-                    <p>{{ $task->car_id }}</p>
-                    <p>{{ $task->money }}</p>
+                    <p>{{ $task->car_id }}号車</p>
+                    <p>{{ $task->money }}円</p>
                     <p>{{ $task->date }}</p>
-                    <p>{{ $task->remarks }}</p>
+                    <p>備考：{{ $task->remarks }}</p>
                 </div>
                 <div class="card-tabs">
                     <ul class="tabs tabs-fixed-width">

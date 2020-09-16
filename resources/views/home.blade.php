@@ -15,7 +15,7 @@
             </div>
             <div class="card">
                 <div class="card-content">
-                    <a href="/articles">日次売上詳細</a>
+                    <a href="/articles">日次売上一覧</a>
                 </div>
             </div>
         </div>
