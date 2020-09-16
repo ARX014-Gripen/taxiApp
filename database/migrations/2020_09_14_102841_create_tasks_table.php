@@ -19,7 +19,8 @@ class CreateTasksTable extends Migration
             $table->integer('money')->unsigned();
             $table->text('remarks')->nullable();
             $table->date('date');
-            $table->timestamps();
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

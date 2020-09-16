@@ -51,6 +51,7 @@ class ArticlesController extends Controller
         $task->money = $request->money;
         $task->date = $request->date;
         $task->remarks = $request->remarks;
+        $task->created_at = date("Y-m-d H:i:s");
         $task->save();
         
         return redirect('/articles');
@@ -68,8 +69,6 @@ class ArticlesController extends Controller
 
         $taskl = Task::query();
         $taskl->whereDate('date', $task->date);
-        // $taskl->select('car_id', DB::raw('SUM(money) as total'));
-        // $taskl->groupBy('car_id');
         $taskl = $taskl->where('car_id',$task->car_id);
         $taskl->orderBy('created_at', 'ASC');
         $tasks=$taskl->get();
@@ -77,7 +76,7 @@ class ArticlesController extends Controller
         $keys = [];
         $counts = [];
         foreach ($tasks as $taskl) {
-            array_push($keys, "{$taskl->create_at}");
+            array_push($keys, $taskl->created_at->format('H:i:s'));
             array_push($counts, $taskl->money);
         }
 
