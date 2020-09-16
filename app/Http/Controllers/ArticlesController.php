@@ -97,7 +97,7 @@ class ArticlesController extends Controller
     {
         //
         // idを元にレコードを検索して$articleに代入
-        $article = Task::find($id);
+        $task = Task::find($id);
 
         $task->car_id = $request->car_id;
         $task->money = $request->money;
