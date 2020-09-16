@@ -31,6 +31,7 @@
                 make_chart(id, labels, data);
             </script>
             日次全体売上
+            {{$date}}
         </div>
     </div>
 @endsection

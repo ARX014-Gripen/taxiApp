@@ -8,6 +8,7 @@ use Illuminate\Http\Requests\CreateTask;
 // 以下を忘れずに。このコントローラーで使用したいモデルがあれば随時追加をしていくっぽい
 use App\Article;
 use App\Task;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ArticlesController extends Controller
@@ -46,12 +47,15 @@ class ArticlesController extends Controller
     public function store(Request $request)
     // public function store(CreateTask $request)
     {
+
+        $dateTime = new Carbon(date("Y-m-d H:i:s"));
+
         $task = new Task;
         $task->car_id = $request->car_id;
         $task->money = $request->money;
         $task->date = $request->date;
         $task->remarks = $request->remarks;
-        $task->created_at = date("Y-m-d H:i:s");
+        $task->created_at = $dateTime->addHours(9);
         $task->save();
         
         return redirect('/articles');
@@ -146,8 +150,10 @@ class ArticlesController extends Controller
      */
     public function home()
     {
+        $dateTime = new Carbon(date("Y-m-d H:i:s"));
+        $dateTime = $dateTime->addHours(9);
         $task = Task::query();
-        $task->whereDate('date', date("Y-m-d"));
+        $task->whereDate('date', $dateTime->format("Y-m-d"));
         $task->select('car_id', DB::raw('SUM(money) as total'));
         $task->groupBy('car_id');
         $task->orderBy('total', 'DESC');
@@ -160,7 +166,7 @@ class ArticlesController extends Controller
             array_push($counts, $task->total);
         }
 
-        return view('home', ['keys'=>$keys,'counts'=>$counts ]);      
+        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime]);      
     }
 
 }
