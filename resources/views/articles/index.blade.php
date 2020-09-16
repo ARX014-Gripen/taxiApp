@@ -2,7 +2,7 @@
 @extends('layouts.application')
 
 {{-- @yield('title')にテンプレートごとの値を代入 --}}
-@section('title', '記事一覧')
+@section('title', '日次売上一覧')
 
 @section('content')
     <div class="row">

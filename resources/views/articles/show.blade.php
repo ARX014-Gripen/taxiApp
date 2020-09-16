@@ -2,7 +2,7 @@
 @extends('layouts.application')
 
 {{-- @yield('title')にテンプレートごとの値を代入 --}}
-@section('title', '記事詳細')
+@section('title', '日次売上詳細')
 
     {{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
 @section('content')
