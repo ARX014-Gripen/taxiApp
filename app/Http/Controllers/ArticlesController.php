@@ -19,7 +19,9 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        $tasks = Task::paginate(3);
+        $task = Task::query();
+        $task->orderBy('date', 'DESC');
+        $tasks = $task->paginate(3);
         return view('articles.index', ['tasks' => $tasks]);    
     }
 
