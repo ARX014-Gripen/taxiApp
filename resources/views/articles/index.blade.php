@@ -4,7 +4,6 @@
 {{-- @yield('title')にテンプレートごとの値を代入 --}}
 @section('title', '記事一覧')
 
-    {{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
 @section('content')
     <div class="row">
         <div class="col s3">
@@ -19,79 +18,39 @@
                 </div>
             </div>
         </div>
-
         <div class="col s9">
-            @if ($articles->lastPage() > 1)
-
-                @if ($articles->previousPageUrl())
-                    <a href="{{ $articles->previousPageUrl() }}">前のページへ</a>
+            @if ($tasks->lastPage() > 1)
+                @if ($tasks->previousPageUrl())
+                    <a href="{{ $tasks->previousPageUrl() }}">前のページへ</a>
                 @endif
-
-                {{ $articles->currentPage() }} / {{ $articles->lastPage() }}
-
-                @if ($articles->nextPageUrl())
-                    <a href="{{ $articles->nextPageUrl() }}">次のページへ</a>
+                {{ $tasks->currentPage() }} / {{ $tasks->lastPage() }}
+                @if ($tasks->nextPageUrl())
+                    <a href="{{ $tasks->nextPageUrl() }}">次のページへ</a>
                 @endif
-
             @endif
-            @foreach ($articles as $article)
+            @foreach ($tasks as $task)
                 <div class="card">
                     <div class="card-content">
-                        <h4>{{ $article->title }}</h4>
-                        <p>{{ $article->body }}</p>
+                        <h4>{{ $task->car_id }}</h4>
+                        <p>{{ $task->money }}</p>
                     </div>
                     <div class="card-tabs">
                         <ul class="tabs tabs-fixed-width">
-                            <li class="tab"><a href="/articles/{{ $article->id }}">詳細を表示</a></li>
-                            <li class="tab"><a href="/articles/{{ $article->id }}/edit">編集する</a></li>
-                            {{-- <form action="/articles/{{ $article->id }}" method="post">
-                                {{ csrf_field() }}
-                                <input type="hidden" name="_method" value="delete">
-                                <li class="tab"><input type="submit" name="" value="削除する"></li>
-                            </form> --}}
-                            <form action="{{ action('ArticlesController@destroy', $article->id) }}"
-                                id="form_{{ $article->id }}" method="post" style="display:inline">
+                            <li class="tab"><a href="/articles/{{ $task->id }}">詳細を表示</a></li>
+                            <li class="tab"><a href="/articles/{{ $task->id }}/edit">編集する</a></li>
+                            <form action="{{ action('ArticlesController@destroy', $task->id) }}" id="form_{{ $task->id }}"
+                                method="post" style="display:inline">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
-                                <li class="tab"><a href="#" data-id="{{ $article->id }}" onclick="deletePost(this);"
+                                <li class="tab"><a href="#" data-id="{{ $task->id }}" onclick="deletePost(this);"
                                         class="fs12">削除する</a></li>
                             </form>
                         </ul>
                     </div>
                 </div>
             @endforeach
-
-            {{-- <div class="chart-container" style="position: relative; width:80vw; height:50vh">
-                <canvas id="allChart"></canvas>
-            </div>
-
-
-            <script src="{{ mix('js/show_chart.js') }}"></script>
-            <script>
-                id = 'allChart';
-                labels = @json($keys);
-                data = @json($counts);
-                make_chart(id, labels, data);
-
-            </script>
- --}}
-
         </div>
     </div>
-
-    {{-- <div class="chart-container" style="position: relative; width:80vw; height:50vh">
-        <canvas id="allChart"></canvas>
-    </div>
-
-    <script src="{{ mix('js/show_chart.js') }}"></script>
-    <script>
-        id = 'allChart';
-        labels = @json($keys);
-        data = @json($counts);
-        make_chart(id, labels, data);
-
-    </script>
-    --}}
 @endsection
 <script>
     function deletePost(e) {

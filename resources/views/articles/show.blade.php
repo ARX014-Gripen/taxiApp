@@ -4,16 +4,29 @@
 {{-- @yield('title')にテンプレートごとの値を代入 --}}
 @section('title', '記事詳細')
 
-{{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
+    {{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
 @section('content')
-    <h1>{{$article->title}}</h1>
-    <p>{{$article->body}}</p>
+    <p>{{ $task->car_id }}</p>
+    <p>{{ $task->money }}</p>
+    <p>{{ $task->date }}</p>
+    <p>{{ $task->remarks }}</p>
     <br><br>
-    <a href="/articles/{{$article->id}}/edit">編集する</a>
-    <form action="/articles/{{$article->id}}" method="post">
-      {{ csrf_field() }}
-      <input type="hidden" name="_method" value="delete">
-      <input type="submit" name="" value="削除する">
+    <a href="/articles/{{ $task->id }}/edit">編集する</a>
+    <form action="{{ action('ArticlesController@destroy', $task->id) }}" id="form_{{ $task->id }}" method="post"
+        style="display:inline">
+        {{ csrf_field() }}
+        {{ method_field('delete') }}
+        <li class="tab"><a href="#" data-id="{{ $task->id }}" onclick="deletePost(this);" class="fs12">削除する</a></li>
     </form>
     <a href="/articles">一覧に戻る</a>
 @endsection
+<script>
+  function deletePost(e) {
+      'use strict';
+
+      if (confirm('are you sure?')) {
+          document.getElementById('form_' + e.dataset.id).submit();
+      }
+  }
+
+</script>

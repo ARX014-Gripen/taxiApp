@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Http\Requests\CreateTask;
+
 // 以下を忘れずに。このコントローラーで使用したいモデルがあれば随時追加をしていくっぽい
 use App\Article;
 use App\Task;
@@ -17,25 +19,8 @@ class ArticlesController extends Controller
      */
     public function index()
     {
-        //
-        // $articles変数にArticleモデルから全てのレコードを取得して、代入
-        // $articles = Article::all();
-        $articles = Article::paginate(3);
-        // 以下をコメントアウト
-        // return $articles;
-        // 以下のように修正
-        // $keys = ['家','研究室','外出','学内','長期不在'];
-        // $counts = [10,4,3,2,1];
-        // return view('articles.index', ['articles' => $articles,'keys'=>$keys,'counts'=>$counts]);    
-        return view('articles.index', ['articles' => $articles]);    
-
-// 
-
-        // $task = Task::query();
-        // $task->whereDate('date', '2020-09-14');
-        // $tasks=$task->get();
-
-
+        $tasks = Task::paginate(3);
+        return view('articles.index', ['tasks' => $tasks]);    
     }
 
     /**
@@ -56,19 +41,8 @@ class ArticlesController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+    // public function store(CreateTask $request)
     {
-        // //
-        // // モデルからインスタンスを生成
-        // $article = new Article;
-        // // $requestにformからのデータが格納されているので、以下のようにそれぞれ代入する  
-        // $article->title = $request->title;
-        // $article->body = $request->body;
-        // // 保存
-        // $article->save();
-        // // 保存後 一覧ページへリダイレクト
-        // return redirect('/articles');
-
-
         $task = new Task;
         $task->car_id = $request->car_id;
         $task->money = $request->money;
@@ -77,8 +51,6 @@ class ArticlesController extends Controller
         $task->save();
         
         return redirect('/articles');
-
-
     }
 
     /**
@@ -89,11 +61,16 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        //
-        // 引数で受け取った$idを元にfindでレコードを取得
-        $article = Article::find($id);
+        // //
+        // // 引数で受け取った$idを元にfindでレコードを取得
+        // $article = Article::find($id);
+        // // viewにデータを渡す  
+        // return view('articles.show', ['article' => $article]);
+        
+        $task = Task::find($id);
         // viewにデータを渡す  
-        return view('articles.show', ['article' => $article]);
+        return view('articles.show', ['task' => $task]);
+        
     }
 
     /**
@@ -105,8 +82,8 @@ class ArticlesController extends Controller
     public function edit($id)
     {
         //
-        $article = Article::find($id);
-        return view('articles.edit', ['article' => $article]);
+        $task = Task::find($id);
+        return view('articles.edit', ['task' => $task]);
     }
 
     /**
@@ -162,30 +139,12 @@ class ArticlesController extends Controller
         $task->orderBy('total', 'DESC');
         $tasks=$task->get();
 
-            //  // ユーザーのフォルダを取得する
-            //  $folders = Auth::user()->folders()->get();
-
-            //  foreach ($folders as $folder) {
-            //      if(strtotime($folder->due_date) === strtotime($request->due_date)){
-            //          $error[] = "その日付は既に登録されています。"; 
-            //          return redirect()->back()->withInput()->withErrors($error);                
-            //      }
-            //  }
-
-        // 以下をコメントアウト
-        // return $articles;
-        // 以下のように修正
-        $keys = ['１号車','２号車','３号車','４号車','５号車'];
-        $counts = [10000,5000,3000,200,100];
-
         $keys = [];
         $counts = [];
-
         foreach ($tasks as $task) {
             array_push($keys, "{$task->car_id}号車");
             array_push($counts, $task->total);
         }
-
 
         return view('home', ['keys'=>$keys,'counts'=>$counts,'tasks'=>$tasks ]);      
     }
