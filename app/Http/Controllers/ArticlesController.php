@@ -61,12 +61,6 @@ class ArticlesController extends Controller
      */
     public function show($id)
     {
-        // //
-        // // 引数で受け取った$idを元にfindでレコードを取得
-        // $article = Article::find($id);
-        // // viewにデータを渡す  
-        // return view('articles.show', ['article' => $article]);
-        
         $task = Task::find($id);
         // viewにデータを渡す  
         return view('articles.show', ['task' => $task]);
@@ -105,11 +99,6 @@ class ArticlesController extends Controller
         $task->remarks = $request->remarks;
         $task->save();
 
-        // // editで編集されたデータを$articleにそれぞれ代入する
-        // $article->title = $request->title;
-        // $article->body = $request->body;
-        // // 保存
-        // $article->save();
         // 詳細ページへリダイレクト
         return redirect("/articles/".$id);
     }
@@ -124,9 +113,9 @@ class ArticlesController extends Controller
     {
         //
         // idを元にレコードを検索
-        $article = Article::find($id);
+        $task = Task::find($id);
         // 削除
-        $article->delete();
+        $task->delete();
         // 一覧にリダイレクト
         return redirect('/articles');
     }
@@ -140,7 +129,7 @@ class ArticlesController extends Controller
     public function home()
     {
         $task = Task::query();
-        $task->whereDate('date', '2020-09-14');
+        $task->whereDate('date', date("Y-m-d"));
         $task->select('car_id', DB::raw('SUM(money) as total'));
         $task->groupBy('car_id');
         $task->orderBy('total', 'DESC');

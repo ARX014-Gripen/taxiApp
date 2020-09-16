@@ -6,27 +6,41 @@
 
     {{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
 @section('content')
-    <p>{{ $task->car_id }}</p>
-    <p>{{ $task->money }}</p>
-    <p>{{ $task->date }}</p>
-    <p>{{ $task->remarks }}</p>
-    <br><br>
-    <a href="/articles/{{ $task->id }}/edit">編集する</a>
-    <form action="{{ action('ArticlesController@destroy', $task->id) }}" id="form_{{ $task->id }}" method="post"
-        style="display:inline">
-        {{ csrf_field() }}
-        {{ method_field('delete') }}
-        <li class="tab"><a href="#" data-id="{{ $task->id }}" onclick="deletePost(this);" class="fs12">削除する</a></li>
-    </form>
-    <a href="/articles">一覧に戻る</a>
+    <div class="row">
+        <div class="col s9">
+            <div class="card">
+                <div class="card-content">
+                    <p>{{ $task->car_id }}</p>
+                    <p>{{ $task->money }}</p>
+                    <p>{{ $task->date }}</p>
+                    <p>{{ $task->remarks }}</p>
+                </div>
+                <div class="card-tabs">
+                    <ul class="tabs tabs-fixed-width">
+
+                        <li class="tab"><a href="/articles/{{ $task->id }}/edit">編集する</a></li>
+                        <form action="{{ action('ArticlesController@destroy', $task->id) }}" id="form_{{ $task->id }}"
+                            method="post" style="display:inline">
+                            {{ csrf_field() }}
+                            {{ method_field('delete') }}
+                            <li class="tab"><a href="#" data-id="{{ $task->id }}" onclick="deletePost(this);"
+                                    class="fs12">削除する</a>
+                            </li>
+                        </form>
+                        <li class="tab"><a href="/articles">一覧に戻る</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 <script>
-  function deletePost(e) {
-      'use strict';
+    function deletePost(e) {
+        'use strict';
 
-      if (confirm('are you sure?')) {
-          document.getElementById('form_' + e.dataset.id).submit();
-      }
-  }
+        if (confirm('are you sure?')) {
+            document.getElementById('form_' + e.dataset.id).submit();
+        }
+    }
 
 </script>
