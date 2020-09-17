@@ -14,7 +14,8 @@
                     <p>{{ $task->money }}円</p>
                     <p>{{ $task->date }}</p>
                     <p>備考：{{ $task->remarks }}</p>
-                    <p><a href={{$url}}>降車位置表示</a></p>
+                    {{-- <p><a href={{$url}}>降車位置表示</a></p>
+                    {{$url}} --}}
                 </div>
                 <div class="card-tabs">
                     <ul class="tabs tabs-fixed-width">
