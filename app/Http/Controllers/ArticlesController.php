@@ -56,6 +56,8 @@ class ArticlesController extends Controller
         $task->date = $request->date;
         $task->remarks = $request->remarks;
         $task->created_at = $dateTime->addHours(9);
+        $task->Lat = $request->Lat;
+        $task->Lon = $request->Lon;
         $task->save();
         
         return redirect('/articles');
@@ -71,6 +73,13 @@ class ArticlesController extends Controller
     {
         // 選択された日時の車両売上詳細を取得
         $task = Task::find($id);
+
+        // $url = "https://www.google.co.jp/maps/@".$task->Lat.",".$task->Lon.",15z";
+        $url = "https://www.google.co.jp/maps/@";
+        $url .= $task->Lat;
+        $url .= ",";
+        $url .= $task->Lon;
+        $url .= ",15z";
 
         // 選択された車両の日次売上を時系列に取得
         $taskl = Task::query();
@@ -88,7 +97,7 @@ class ArticlesController extends Controller
         }
 
         // 画面呼び出しとデータの受け渡し
-        return view('articles.show', ['task' => $task,'counts' => $counts,'keys' => $keys]);
+        return view('articles.show', ['task' => $task,'counts' => $counts,'keys' => $keys,'url' => $url]);
         
     }
 

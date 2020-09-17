@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 @endforeach
-            {{-- </div> --}}
+                {{-- </div> --}}
         </div>
     @endsection
     <script>
@@ -63,5 +63,4 @@
                 document.getElementById('form_' + e.dataset.id).submit();
             }
         }
-
     </script>

@@ -21,6 +21,8 @@ class CreateTasksTable extends Migration
             $table->date('date');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
+            $table->double('Lat',15,12)->nullable();
+            $table->double('Lon',15,12)->nullable();
         });
     }
 
