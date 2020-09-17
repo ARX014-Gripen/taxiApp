@@ -75,7 +75,7 @@ class ArticlesController extends Controller
         $task = Task::find($id);
 
         // 降車位置
-        $url = 'https://www.google.co.jp/maps/@?api=1&map_action=map&center=';
+        $url = 'https://www.google.com/maps/@?api=1&map_action=map&center=';
         $url .= $task->Lat;
         $url .= ",";
         $url .= $task->Lon;
