@@ -59,7 +59,7 @@
         function deletePost(e) {
             'use strict';
 
-            if (confirm('are you sure?')) {
+            if (confirm('削除しますか?')) {
                 document.getElementById('form_' + e.dataset.id).submit();
             }
         }

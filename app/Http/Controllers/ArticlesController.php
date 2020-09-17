@@ -49,7 +49,7 @@ class ArticlesController extends Controller
     {
 
         $dateTime = new Carbon(date("Y-m-d H:i:s"));
-
+        // データ登録
         $task = new Task;
         $task->car_id = $request->car_id;
         $task->money = $request->money;
@@ -74,12 +74,12 @@ class ArticlesController extends Controller
         // 選択された日時の車両売上詳細を取得
         $task = Task::find($id);
 
-        // $url = "https://www.google.co.jp/maps/@".$task->Lat.",".$task->Lon.",15z";
-        $url = "https://www.google.co.jp/maps/@";
+        // 降車位置
+        $url = 'https://www.google.co.jp/maps/@?api=1&map_action=map&center=';
         $url .= $task->Lat;
         $url .= ",";
         $url .= $task->Lon;
-        $url .= ",15z";
+        $url .= "&zoom=21";
 
         // 選択された車両の日次売上を時系列に取得
         $taskl = Task::query();
