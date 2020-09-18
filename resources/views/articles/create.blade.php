@@ -38,8 +38,8 @@
                             <label for="remarks">備考</label>
                             <textarea name="remarks" rows="8" cols="80" placeholder="備考を入れる"></textarea>
                         </div>
-                        <input type="hidden" type="text" name="Lat" id="Lat">
-                        <input type="hidden" type="text" name="Lon" id="Lon">
+                        <input type="hidden" name="Lat" id="Lat">
+                        <input type="hidden" name="Lon" id="Lon">
                         <div>
                             <input type="submit" value="送信">
                         </div>
@@ -52,7 +52,7 @@
 <script>
     window.onload = function() {
         // ページ読み込み時に実行したい処理
-        // LatLon()
+        LatLon()
     }
 
     function LatLon() {

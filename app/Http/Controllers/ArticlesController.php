@@ -75,12 +75,24 @@ class ArticlesController extends Controller
         $task = Task::find($id);
 
         // 降車位置
-        $url = "https://www.google.com/maps/@?api=1&map_action=map&center=";
-        $url .= $task->Lat;
-        $url .= ",";
+        // $url = "https://www.google.com/maps/@?api=1&map_action=map&center=";
+        // $url .= $task->Lat;
+        // $url .= ",";
+        // $url .= $task->Lon;
+        // $url .= "&zoom=21";
+        $url = "https://www.openstreetmap.org/export/embed.html?bbox=";
         $url .= $task->Lon;
-        $url .= "&zoom=21";
-
+        $url .= "%2C";
+        $url .= $task->Lat;
+        $url .= "%2C";
+        $url .= $task->Lon;
+        $url .= "%2C";
+        $url .= $task->Lat;
+        $url .= "&amp;layer=mapnik&amp;marker=";
+        $url .= $task->Lat;
+        $url .= "%2C";
+        $url .= $task->Lon;
+        
         // 選択された車両の日次売上を時系列に取得
         $taskl = Task::query();
         $taskl->whereDate('date', $task->date);

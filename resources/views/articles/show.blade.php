@@ -1,6 +1,12 @@
 {{-- layoutsフォルダのapplication.blade.phpを継承 --}}
 @extends('layouts.application')
 
+@section('head')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css">
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+@endsection
+
+
 {{-- @yield('title')にテンプレートごとの値を代入 --}}
 @section('title', '日次売上詳細')
 
@@ -14,8 +20,8 @@
                     <p>{{ $task->money }}円</p>
                     <p>{{ $task->date }}</p>
                     <p>備考：{{ $task->remarks }}</p>
-                    {{-- <p><a href={{$url}}>降車位置表示</a></p>
-                    {{$url}} --}}
+                    {{-- <p><a href={{ $url }}>降車位置表示</a></p>
+                    {{ $url }} --}}
                 </div>
                 <div class="card-tabs">
                     <ul class="tabs tabs-fixed-width">
@@ -49,9 +55,28 @@
             </script>
         </div>
     </div>
-
+    <div id="map" style="position: relative; width:80vw; height:50vh"></div>
+    <br>
 @endsection
 <script>
+    window.onload = function() {
+        // ページ読み込み時に実行したい処理
+        // 地図を作成する
+        var mymap = L.map('map');
+
+        // タイルレイヤーを作成し、地図にセットする
+        L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">国土地理院</a>',
+        }).addTo(mymap);
+
+        // 地図の中心座標とズームレベルを設定する
+        mymap.setView([@json($task->Lat), @json($task->Lon)], 13);
+       
+        // マーカを置く
+        L.marker([37.508106, 139.930239]).addTo(mymap);
+    }
+
     function deletePost(e) {
         'use strict';
 
