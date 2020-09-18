@@ -67,7 +67,7 @@
         // タイルレイヤーを作成し、地図にセットする
         L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png', {
             maxZoom: 18,
-            attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">国土地理院</a>',
+            attribution: '© OpenStreetMap contributors, CC-BY-SA <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">国土地理院</a>',
         }).addTo(mymap);
 
         // 地図の中心座標とズームレベルを設定する
