@@ -56,8 +56,8 @@ class ArticlesController extends Controller
         $task->date = $request->date;
         $task->remarks = $request->remarks;
         $task->created_at = $dateTime->addHours(9);
-        $task->Lat = $request->Lat;
-        $task->Lon = $request->Lon;
+        $task->origin = $request->origin;
+        $task->destination = $request->destination;
         $task->save();
         
         return redirect('/articles');
@@ -75,24 +75,12 @@ class ArticlesController extends Controller
         $task = Task::find($id);
 
         // 降車位置
-        // $url = "https://www.google.com/maps/@?api=1&map_action=map&center=";
-        // $url .= $task->Lat;
-        // $url .= ",";
-        // $url .= $task->Lon;
-        // $url .= "&zoom=21";
-        $url = "https://www.openstreetmap.org/export/embed.html?bbox=";
-        $url .= $task->Lon;
-        $url .= "%2C";
-        $url .= $task->Lat;
-        $url .= "%2C";
-        $url .= $task->Lon;
-        $url .= "%2C";
-        $url .= $task->Lat;
-        $url .= "&amp;layer=mapnik&amp;marker=";
-        $url .= $task->Lat;
-        $url .= "%2C";
-        $url .= $task->Lon;
-        
+        $url = "https://www.google.com/maps/dir/?api=1&origin=";
+        $url .= $task->origin;
+        $url .= "&destination=";
+        $url .= $task->destination;
+        $url .= "&travelmode=driving";
+
         // 選択された車両の日次売上を時系列に取得
         $taskl = Task::query();
         $taskl->whereDate('date', $task->date);
