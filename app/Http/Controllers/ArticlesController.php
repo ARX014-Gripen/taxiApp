@@ -154,13 +154,13 @@ class ArticlesController extends Controller
         return redirect('/articles');
     }
 
-        /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function home()
+    public function date()
     {
         // 現在時刻を日本時間に設定
         $dateTime = new Carbon(date("Y-m-d H:i:s"));
@@ -183,7 +183,46 @@ class ArticlesController extends Controller
         }
 
         // 画面呼び出しとデータの受け渡し
-        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime]);      
+        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime,'url'=>'/month']);      
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function month()
+    {
+        // 現在時刻を日本時間に設定
+        $dateTime = new Carbon(date("Y-m-d H:i:s"));
+        $dateTime = $dateTime->addHours(9);
+
+        //指定の年月
+        $Month = $dateTime->format("Y-m");
+        //月初め
+        $startDate = new Carbon('first day of ' . $Month);
+        //月終わり
+        $endDate  = new Carbon('last day of ' . $Month);
+        
+        // 車両ごとの月次売上を降順で取得
+        $task = Task::query();
+        $task->whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')]);
+        $task->select('car_id', DB::raw('SUM(money) as total'));
+        $task->groupBy('car_id');
+        $task->orderBy('total', 'DESC');
+        $tasks=$task->get();
+
+        // 円グラフ用データへパッキング
+        $keys = [];
+        $counts = [];
+        foreach ($tasks as $task) {
+            array_push($keys, "{$task->car_id}号車");
+            array_push($counts, $task->total);
+        }
+
+        // 画面呼び出しとデータの受け渡し
+        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime,'url'=>'/date']);      
     }
 
 }

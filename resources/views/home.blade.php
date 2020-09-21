@@ -20,6 +20,11 @@
             </div>
         </div>
         <div class="col s9">
+            @if ($url === '/month')
+                <a href={{ $url }}>月次全体売上</a>
+            @else
+                <a href={{ $url }}>日次全体売上</a>
+            @endif
             <div class="chart-container" style="position: relative; width:80vw; height:50vh">
                 <canvas id="allChart"></canvas>
             </div>
@@ -29,9 +34,14 @@
                 labels = @json($keys);
                 data = @json($counts);
                 make_chart(id, labels, data);
+
             </script>
-            日次全体売上
-            {{$date}}
+            @if ($url === '/month')
+                日次全体売上
+            @else
+                月次全体売上
+            @endif
+            {{ $date }}
         </div>
     </div>
 @endsection
