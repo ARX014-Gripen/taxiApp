@@ -4,7 +4,7 @@
 {{-- @yield('title')にテンプレートごとの値を代入 --}}
 @section('title', 'ホーム')
 
-    {{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
+{{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
 @section('content')
     <div class="row">
         <div class="col s3">
