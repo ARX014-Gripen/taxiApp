@@ -4,7 +4,7 @@
 {{-- @yield('title')にテンプレートごとの値を代入 --}}
 @section('title', 'ホーム')
 
-{{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
+    {{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
 @section('content')
     <div class="row">
         <div class="col s3">
@@ -20,10 +20,14 @@
             </div>
         </div>
         <div class="col s9">
-            @if ($url === '/month')
-                <a href={{ $url }}>月次全体売上</a>
-            @else
-                <a href={{ $url }}>日次全体売上</a>
+            @if ($url === '/week')
+                <a href={{ $url }}>週次全体売上に切り替え</a>
+            @elseif ($url === '/month')
+                <a href={{ $url }}>月次全体売上に切り替え</a>
+            @elseif ($url === '/year')
+                <a href={{ $url }}>年次全体売上に切り替え</a>
+            @elseif ($url === '/day')
+                <a href={{ $url }}>日次全体売上に切り替え</a>
             @endif
             <div class="chart-container" style="position: relative; width:80vw; height:50vh">
                 <canvas id="allChart"></canvas>
@@ -34,12 +38,15 @@
                 labels = @json($keys);
                 data = @json($counts);
                 make_chart(id, labels, data);
-
             </script>
-            @if ($url === '/month')
+            @if ($url === '/week')
                 日次全体売上
-            @else
+            @elseif ($url === '/month')
+                週次全体売上
+            @elseif ($url === '/year')
                 月次全体売上
+            @elseif ($url === '/day')
+                年次全体売上
             @endif
             {{ $date }}
         </div>

@@ -160,7 +160,7 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function date()
+    public function day()
     {
         // 現在時刻を日本時間に設定
         $dateTime = new Carbon(date("Y-m-d H:i:s"));
@@ -169,6 +169,44 @@ class ArticlesController extends Controller
         // 車両ごとの日次売上を降順で取得
         $task = Task::query();
         $task->whereDate('date', $dateTime->format("Y-m-d"));
+        $task->select('car_id', DB::raw('SUM(money) as total'));
+        $task->groupBy('car_id');
+        $task->orderBy('total', 'DESC');
+        $tasks=$task->get();
+
+        // 円グラフ用データへパッキング
+        $keys = [];
+        $counts = [];
+        foreach ($tasks as $task) {
+            array_push($keys, "{$task->car_id}号車");
+            array_push($counts, $task->total);
+        }
+
+        // 画面呼び出しとデータの受け渡し
+        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime,'url'=>'/week']);      
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function week()
+    {
+        // 現在時刻を日本時間に設定
+        $dateTime = new Carbon(date("Y-m-d H:i:s"));
+        $dateTime = $dateTime->addHours(9);
+
+        //週初め
+        $date = clone $dateTime;
+        $startDate = clone $date->startOfWeek();
+        //週終わり
+        $endDate  = clone $date->endOfWeek();
+        
+        // 車両ごとの月次売上を降順で取得
+        $task = Task::query();
+        $task->whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')]);
         $task->select('car_id', DB::raw('SUM(money) as total'));
         $task->groupBy('car_id');
         $task->orderBy('total', 'DESC');
@@ -222,7 +260,48 @@ class ArticlesController extends Controller
         }
 
         // 画面呼び出しとデータの受け渡し
-        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime,'url'=>'/date']);      
+        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime,'url'=>'/year']);      
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function year()
+    {
+        // 現在時刻を日本時間に設定
+        $dateTime = new Carbon(date("Y-m-d H:i:s"));
+        $dateTime = $dateTime->addHours(9);
+
+        //指定の年月
+        $Year = $dateTime->format("Y");
+        //年初め
+        $startDate = $Year;
+        $startDate .= "-01-01";
+        //年終わり
+        $endDate = $Year;
+        $endDate .= "-12-31";
+        
+        // 車両ごとの月次売上を降順で取得
+        $task = Task::query();
+        $task->whereBetween('date', [$startDate, $endDate]);
+        $task->select('car_id', DB::raw('SUM(money) as total'));
+        $task->groupBy('car_id');
+        $task->orderBy('total', 'DESC');
+        $tasks=$task->get();
+
+        // 円グラフ用データへパッキング
+        $keys = [];
+        $counts = [];
+        foreach ($tasks as $task) {
+            array_push($keys, "{$task->car_id}号車");
+            array_push($counts, $task->total);
+        }
+
+        // 画面呼び出しとデータの受け渡し
+        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$startDate,'url'=>'/day']);      
     }
 
 }
