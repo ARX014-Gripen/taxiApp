@@ -1,5 +1,5 @@
 ## 準備
-comporser install<br>
+composer install<br>
 npm install<br>
 npm run dev<br>
 
