@@ -1,7 +1,7 @@
 ## 準備
-composer install
-npm install
-npm run dev
+comporser install<br>
+npm install<br>
+npm run dev<br>
 
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
