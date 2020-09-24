@@ -10,23 +10,32 @@
         <div class="col s9">
             <div class="card">
                 <div class="card-content">
+                    @if ($errors->any())
+                        <div>
+                            <ul>
+                                @foreach ($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="/articles/{{ $task->id }}" method="post">
                         {{ csrf_field() }}
                         <div>
                             <label for="car_id">号車</label>
-                            <input type="number" name="car_id" placeholder="車両番号を入れる" value="{{ $task->car_id }}">
+                            <input type="number" name="car_id" placeholder="車両番号を入れる" value="{{ old('car_id') ?? $task->car_id }}">
                         </div>
                         <div>
                             <label for="money">売上</label>
-                            <input type="number" name="money" placeholder="売上を入れる" value="{{ $task->money }}">
+                            <input type="number" name="money" placeholder="売上を入れる" value="{{ old('money') ?? $task->money }}">
                         </div>
                         <div>
                             <label for="date">日付</label>
-                            <input type="date" name="date" placeholder="日付を入れる" value="{{ $task->date }}">
+                            <input type="date" name="date" placeholder="日付を入れる" value="{{ old('date') ?? $task->date }}">
                         </div>
                         <div>
                             <label for="remarks">備考を入れる</label>
-                            <textarea name="remarks" rows="8" cols="80" placeholder="備考を入れる">{{ $task->remarks }}</textarea>
+                            <textarea name="remarks" rows="8" cols="80" placeholder="備考を入れる">{{ old('remarks') ?? $task->remarks }}</textarea>
                         </div>
                         <div>
                             <input type="hidden" name="_method" value="patch">

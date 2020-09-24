@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateTask;
+use App\Http\Requests\UpdateTask;
 
 use \SplFileObject;
 
@@ -123,7 +124,8 @@ class ArticlesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    // public function update(Request $request, $id)
+    public function update(UpdateTask $request, $id)
     {
         //
         // idを元にレコードを検索して$articleに代入
@@ -206,7 +208,7 @@ class ArticlesController extends Controller
         //週終わり
         $endDate  = clone $date->endOfWeek();
         
-        // 車両ごとの月次売上を降順で取得
+        // 車両ごとの週次売上を降順で取得
         $task = Task::query();
         $task->whereBetween('date', [$startDate->format('Y-m-d'), $endDate->format('Y-m-d')]);
         $task->select('car_id', DB::raw('SUM(money) as total'));
@@ -286,7 +288,7 @@ class ArticlesController extends Controller
         $endDate = $Year;
         $endDate .= "-12-31";
         
-        // 車両ごとの月次売上を降順で取得
+        // 車両ごとの年次売上を降順で取得
         $task = Task::query();
         $task->whereBetween('date', [$startDate, $endDate]);
         $task->select('car_id', DB::raw('SUM(money) as total'));
