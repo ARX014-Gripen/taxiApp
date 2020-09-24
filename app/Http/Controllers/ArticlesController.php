@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Requests\CreateTask;
 
+use \SplFileObject;
+
 // 以下を忘れずに。このコントローラーで使用したいモデルがあれば随時追加をしていくっぽい
 use App\Article;
 use App\Task;
@@ -303,5 +305,4 @@ class ArticlesController extends Controller
         // 画面呼び出しとデータの受け渡し
         return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$startDate,'url'=>'/day']);      
     }
-
 }

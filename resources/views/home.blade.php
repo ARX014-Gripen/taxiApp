@@ -15,7 +15,7 @@
             </div>
             <div class="card">
                 <div class="card-content">
-                    <a href="/articles">日次売上一覧</a>
+                    <a href="/articles">売上一覧</a>
                 </div>
             </div>
         </div>
@@ -38,6 +38,7 @@
                 labels = @json($keys);
                 data = @json($counts);
                 make_chart(id, labels, data);
+
             </script>
             @if ($url === '/week')
                 日次全体売上
@@ -51,4 +52,8 @@
             {{ $date }}
         </div>
     </div>
+@endsection
+@section('script')
+    <script>
+    </script>
 @endsection
