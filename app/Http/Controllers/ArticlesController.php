@@ -305,6 +305,6 @@ class ArticlesController extends Controller
         }
 
         // 画面呼び出しとデータの受け渡し
-        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$startDate,'url'=>'/day']);      
+        return view('home', ['keys'=>$keys,'counts'=>$counts,'date'=>$dateTime,'url'=>'/day']);      
     }
 }
