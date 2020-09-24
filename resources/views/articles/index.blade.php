@@ -14,7 +14,7 @@
             </div>
             <div class="card">
                 <div class="card-content">
-                    <a href="/month">ホーム画面に戻る</a>
+                    <a href="/year">ホーム画面に戻る</a>
                 </div>
             </div>
         </div>
