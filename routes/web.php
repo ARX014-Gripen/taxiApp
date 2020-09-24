@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // 以下を追加
 Route::resource('articles', 'ArticlesController');
@@ -22,3 +22,4 @@ Route::get('/day', 'ArticlesController@day');
 Route::get('/week', 'ArticlesController@week');
 Route::get('/month', 'ArticlesController@month');
 Route::get('/year', 'ArticlesController@year');
+Route::get('/', 'ArticlesController@year');
