@@ -13,8 +13,20 @@ class CreateTask extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
+
+    public function attributes()
+    {
+        return [
+            'car_id' => '号車', 
+            'money' => '売上',
+            'date' => '日付',
+            'origin' => '出発地点',
+            'destination' => '到着地点',
+        ];
+    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -25,6 +37,11 @@ class CreateTask extends FormRequest
     {
         return [
             //
+            'car_id' => 'required', // ★
+            'money' => 'required', // ★
+            'date' => 'required', // ★
+            'origin' => 'required', // ★
+            'destination' => 'required', // ★
         ];
     }
 }

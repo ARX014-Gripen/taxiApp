@@ -10,6 +10,15 @@
         <div class="col s9">
             <div class="card">
                 <div class="card-content">
+                    @if ($errors->any())
+                        <div>
+                            <ul>
+                                @foreach ($errors->all() as $message)
+                                    <li>{{ $message }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <form action="/articles" method="post" onsubmit="return preSubmit();">
                         {{-- 以下を入れないとエラーになる --}}
                         {{ csrf_field() }}
@@ -50,12 +59,15 @@
     function preSubmit() {
         var origin = document.getElementById("origin").value
         var destination = document.getElementById("destination").value
-        var url = "https://www.google.com/maps/dir/?api=1&origin=";
-        url += origin;
-        url += "&destination=";
-        url += destination;
-        url += "&travelmode=driving";
-        window.open(url);
+        if ( !(!origin && !destination)) {
+            var url = "https://www.google.com/maps/dir/?api=1&origin=";
+            url += origin;
+            url += "&destination=";
+            url += destination;
+            url += "&travelmode=driving";
+            window.open(url);
+        }
         return
     }
+
 </script>

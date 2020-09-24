@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Requests\CreateTask;
+use App\Http\Requests\CreateTask;
 
 use \SplFileObject;
 
@@ -46,8 +46,8 @@ class ArticlesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    // public function store(CreateTask $request)
+    // public function store(Request $request)
+    public function store(CreateTask $request)
     {
 
         $dateTime = new Carbon(date("Y-m-d H:i:s"));
