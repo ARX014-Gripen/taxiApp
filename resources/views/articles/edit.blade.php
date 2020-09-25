@@ -34,6 +34,14 @@
                             <input type="date" name="date" placeholder="日付を入れる" value="{{ old('date') ?? $task->date }}">
                         </div>
                         <div>
+                            <label for="origin">出発地点</label>
+                            <input id="origin" name="origin" placeholder="出発地点を入れてください" value="{{ old('origin') ?? $task->origin }}">
+                        </div>
+                        <div>
+                            <label for="destination">到着地点</label>
+                            <input id="destination" name="destination" placeholder="到着地点を入れてください" value="{{ old('destination') ?? $task->destination }}">
+                        </div>
+                        <div>
                             <label for="remarks">備考を入れる</label>
                             <textarea name="remarks" rows="8" cols="80" placeholder="備考を入れる">{{ old('remarks') ?? $task->remarks }}</textarea>
                         </div>

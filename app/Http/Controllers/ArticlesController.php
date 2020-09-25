@@ -125,7 +125,7 @@ class ArticlesController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function update(Request $request, $id)
-    public function update(UpdateTask $request, $id)
+    public function update(CreateTask $request, $id)
     {
         //
         // idを元にレコードを検索して$articleに代入

@@ -16,6 +16,8 @@
                     <p>{{ $task->car_id }}号車</p>
                     <p>{{ $task->money }}円</p>
                     <p>{{ $task->date }}</p>
+                    <p>出発地点：{{ $task->origin }}</p>
+                    <p>到着地点：{{ $task->destination }}</p>
                     <p>備考：{{ $task->remarks }}</p>
                     <p><a href={{$url}}>ルート再検索</a></p>
                 </div>
