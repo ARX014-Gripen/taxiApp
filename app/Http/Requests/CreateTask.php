@@ -38,10 +38,10 @@ class CreateTask extends FormRequest
         return [
             //
             'car_id' => 'required', // ★
-            'money' => 'required', // ★
             'date' => 'required', // ★
             'origin' => 'required', // ★
             'destination' => 'required', // ★
+            'money' => 'required', // ★
         ];
     }
 }

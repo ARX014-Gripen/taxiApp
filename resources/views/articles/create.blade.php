@@ -24,11 +24,11 @@
                         {{ csrf_field() }}
                         <div>
                             <label for="car_id">号車</label>
-                            <input type="number" name="car_id" placeholder="号車番号を入れる">
+                            <input id="car_id" type="number" name="car_id" placeholder="号車番号を入れる">
                         </div>
                         <div>
                             <label for="date">日付</label>
-                            <input type="date" name="date" placeholder="日付を入れる">
+                            <input id="date" type="date" name="date" placeholder="日付を入れる">
                         </div>
                         <div>
                             <label for="origin">出発地点</label>
@@ -40,7 +40,7 @@
                         </div>
                         <div>
                             <label for="money">売上</label>
-                            <input type="number" name="money" placeholder="売上を入れる">
+                            <input id="money" type="number" name="money" placeholder="売上を入れる">
                         </div>
                         <div>
                             <label for="remarks">備考</label>
@@ -57,9 +57,12 @@
 @endsection
 <script>
     function preSubmit() {
+        var car_id = document.getElementById("car_id").value
+        var date = document.getElementById("date").value
         var origin = document.getElementById("origin").value
         var destination = document.getElementById("destination").value
-        if ( !(!origin && !destination)) {
+        var money = document.getElementById("money").value
+        if ( !(!origin && !destination && !car_id && !date)) {
             var url = "https://www.google.com/maps/dir/?api=1&origin=";
             url += origin;
             url += "&destination=";
