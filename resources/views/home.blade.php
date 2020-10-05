@@ -29,7 +29,7 @@
             @elseif ($url === '/day')
                 <a href={{ $url }}>日次全体売上に切り替え</a>
             @endif
-            <div class="chart-container" style="position: relative; width:80vw; height:50vh">
+            <div class="chart-container" style="position: relative; width:70vw; height:50vh">
                 <canvas id="allChart"></canvas>
             </div>
             <script src="{{ mix('js/show_pie_chart.js') }}"></script>
